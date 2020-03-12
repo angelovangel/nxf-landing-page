@@ -1,0 +1,16 @@
+.info-box-icon {
+  -webkit-transform: scale(1);
+  transform: scale(1);
+  -webkit-transition: .1s ease-in-out;
+  transition: .1s ease-in-out;
+}
+
+.info-box-icon:active {
+  -webkit-transform: scale(0.9);
+  transform: scale(0.9);
+}
+
+.info-box:hover {
+background-color: #E5E7E9;  
+}
+

@@ -7,7 +7,7 @@ library(shinyWidgets)
 library(shinyjs)
 library(pingr) # get status of apps
 library(parallel)
-library(loggit)
+
 
 
 ui <- dashboardPage(
@@ -106,35 +106,39 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) { 
-  options(shiny.launch.browser = TRUE)
+  #options(shiny.launch.browser = TRUE)
   source("renderAppBox.R", local = TRUE)
   
   # app1
   output$ibox1 <- renderAppBox(app_name = "bcl", 
-                               app_ip = "google.com", 
+                               app_status = TRUE,
+                               app_ip = "10.24.11.83:3838/bcl", 
                                channel_name = "aa-nextflow", 
-                               invalidate_interval = 5000, 
-                               userlog_path = "../nextflow-bcl-shiny/userlog") # where to put the other apps?
+                               #invalidate_interval = 5000, 
+                               userlog_path = "../bcl/userlog") # where to put the other apps?
   # app2
   output$ibox2 <- renderAppBox(app_name = "fastp",
-                               app_ip = "google.com", 
+                               app_status = TRUE,
+                               app_ip = "10.24.11.83:3838/fastp",
                                channel_name = "aa-nextflow", 
-                               invalidate_interval = 5000, 
-                               userlog_path = "../nextflow-fastp-shiny/userlog")
+                               #invalidate_interval = 5000, 
+                               userlog_path = "../fastp/userlog")
     
   # app3
   output$ibox3 <- renderAppBox(app_name = "nf-core/bacass",
-                               app_ip = "blabla",
+                               app_status = FALSE,
+                               app_ip = "#",
                                channel_name = "nf-core",
-                               invalidate_interval = 5000, 
-                               userlog_path = "../nextflow-fastp-shiny/userlog")
+                               #invalidate_interval = 5000, 
+                               userlog_path = "../fastp/userlog")
   
   # app4
   output$ibox4 <- renderAppBox(app_name = "nf-core/mag",
-                               app_ip = "blabla",
+                               app_status = FALSE,
+                               app_ip = "#",
                                channel_name = "nf-core",
-                               invalidate_interval = 5000, 
-                               userlog_path = "../nextflow-fastp-shiny/userlog")
+                               #invalidate_interval = 5000, 
+                               userlog_path = "../fastp/userlog")
   
   
 }

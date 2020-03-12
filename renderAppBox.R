@@ -1,15 +1,16 @@
 # function to render app info box 
 # has to be sourced within server and local (involves reactive file reader)
-require(loggit)
 
- renderAppBox <- function(app_name, 
+
+ renderAppBox <- function(app_name,
+                          app_status,
                           app_ip, # e.g. google.com
                           channel_name, 
-                          invalidate_interval, 
+                          #invalidate_interval, 
                           userlog_path) {
    
    # reactive to check changes to loggit file, invalidates renderInfoBox accordingly
-    app_logdata <- reactiveFileReader(intervalMillis = 5000, 
+    app_logdata <- reactiveFileReader(intervalMillis = 3000, 
                                       session = NULL, 
                                       filePath = userlog_path, 
                                       readFunc = readLines)
@@ -18,11 +19,12 @@ require(loggit)
         need(file.exists(userlog_path), message = paste("no userlog file found at", userlog_path))
       )
       
-      invalidateLater(invalidate_interval) # this is needed to check online status of app_ip, independent of app_usercount
-      status <- try( pingr::is_up(app_ip) ) # e.g. google.com
-      #app_usercount <- app_logdata()
+      #invalidateLater(invalidate_interval) # this is needed to check online status of app_ip, independent of app_usercount
+      # status <- app_status
+      # status <- try( pingr::is_up(app_ip) ) # e.g. google.com
+      # app_usercount <- app_logdata()
   
-      if(status) {
+      if(app_status) {
         title <- paste(channel_name, "| online")
         subtitle <- HTML(paste("cores: <b>", 
                            parallel::detectCores(), "</b>",

@@ -106,23 +106,23 @@ ui <- dashboardPage(
 )
 
 server <- function(input, output, session) { 
-  #options(shiny.launch.browser = TRUE)
+  options(shiny.launch.browser = TRUE)
   source("renderAppBox.R", local = TRUE)
   
   # app1
   output$ibox1 <- renderAppBox(app_name = "bcl", 
                                app_status = TRUE,
-                               app_ip = "10.24.11.83:3838/bcl", 
+                               app_ip = "#", 
                                channel_name = "aa-nextflow", 
                                #invalidate_interval = 5000, 
-                               userlog_path = "../bcl/userlog") # where to put the other apps?
+                               userlog_path = "../nextflow-bcl-shiny/userlog") # where to put the other apps?
   # app2
   output$ibox2 <- renderAppBox(app_name = "fastp",
                                app_status = TRUE,
-                               app_ip = "10.24.11.83:3838/fastp",
+                               app_ip = "#",
                                channel_name = "aa-nextflow", 
                                #invalidate_interval = 5000, 
-                               userlog_path = "../fastp/userlog")
+                               userlog_path = "../nextflow-fastp-shiny/userlog")
     
   # app3
   output$ibox3 <- renderAppBox(app_name = "nf-core/bacass",
@@ -130,15 +130,15 @@ server <- function(input, output, session) {
                                app_ip = "#",
                                channel_name = "nf-core",
                                #invalidate_interval = 5000, 
-                               userlog_path = "../fastp/userlog")
+                               userlog_path = "../nfcore-bacass-shiny/userlog")
   
   # app4
   output$ibox4 <- renderAppBox(app_name = "nf-core/mag",
-                               app_status = FALSE,
+                               app_status = TRUE,
                                app_ip = "#",
                                channel_name = "nf-core",
                                #invalidate_interval = 5000, 
-                               userlog_path = "../fastp/userlog")
+                               userlog_path = "../nfcore-mag-shiny/userlog")
   
   
 }
